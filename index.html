@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dalton Dole | Curriculum Vitae</title>
+    <title>Dalton Ellscheid | Resume Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -98,31 +98,12 @@
             background: var(--golden);
             transform: translateX(-50%);
         }
-        #skills-list {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        .contact-grid, .exp-grid, .skills-grid, .projects-grid {
+            display: grid;
             gap: 1.5rem;
         }
-        #skills-list li {
-            background: var(--off-white);
-            border: 3px solid var(--golden);
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 2px 10px var(--shadow);
-        }
-        #skills-list li:hover, #skills-list li.active {
-            background: var(--golden);
-            color: var(--dark-grey);
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px var(--shadow);
-        }
-        .project-grid { display: grid; gap: 2rem; }
-        .project {
+        .contact-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        .exp-grid .exp-item, .projects-grid .project {
             background: var(--off-white);
             padding: 2rem;
             border-left: 5px solid var(--deep-red);
@@ -130,74 +111,182 @@
             box-shadow: 0 4px 15px var(--shadow);
             transition: all 0.4s ease;
         }
-        .project:hover {
+        .exp-grid .exp-item:hover, .projects-grid .project:hover {
             transform: translateX(10px);
             box-shadow: 0 6px 20px var(--shadow);
         }
-        .project h3 {
+        .exp-item h3, .project h3 {
             color: var(--deep-red);
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
+        .skills-grid {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            text-align: center;
+        }
+        .skills-grid div {
+            background: var(--off-white);
+            border: 3px solid var(--golden);
+            padding: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+        .skills-grid div:hover, .skills-grid div.active {
+            background: var(--golden);
+            color: var(--dark-grey);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        .media-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .media-item { padding: 1rem; }
         footer {
             background: var(--dark-grey);
             color: var(--off-white);
             padding: 2rem;
-            font-size: 1rem;
+            text-align: center;
             box-shadow: 0 -4px 20px var(--shadow);
         }
-        footer a {
+        footer a, .cta a {
             color: var(--golden);
             text-decoration: none;
             font-weight: 700;
             transition: color 0.4s ease;
         }
-        footer a:hover { color: var(--off-white); }
+        footer a:hover, .cta a:hover { color: var(--off-white); }
+        .cta {
+            background: var(--deep-red);
+            color: var(--off-white);
+            padding: 3rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .cta button {
+            background: var(--golden);
+            color: var(--dark-grey);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .cta button:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
     <header>
         <div class="header-overlay"></div>
-        <h1 id="typewriter">Dalton Dole</h1>
-        <p class="subtitle">Aspiring Web Architect | Scholar of Design</p>
+        <h1 id="typewriter">Dalton Ellscheid</h1>
+        <p class="subtitle">Business Strategist | Digital Marketer | Sustainable Innovator</p>
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>A relentless innovator blending the artistry of Ivy League tradition with cutting-edge web development.</p>
+            <p>A dynamic entrepreneur with a background in business and digital marketing, specializing in high-yield ventures, branding, and sustainable innovation. Passionate about leveraging cutting-edge technology for transformative business solutions.</p>
+            <div class="contact-grid">
+                <p>Email: <a href="mailto:dalton@example.com">dalton@example.com</a></p>
+                <p>Phone: (306) 555-1234</p>
+                <p>Location: Saskatoon, SK</p>
+                <p><a href="https://linkedin.com/in/daltonellscheid">LinkedIn</a> | <a href="https://threads.net/@daltonellscheid">Threads</a> | <a href="https://twitch.tv/daltonellscheid">Twitch</a> | <a href="https://github.com/DollywoodDole">GitHub</a> | <a href="https://daltonellscheid.com">Website</a></p>
+            </div>
         </section>
-        <section id="skills">
-            <h2>Skills</h2>
-            <ul id="skills-list">
-                <li data-skill="html">HTML</li>
-                <li data-skill="css">CSS</li>
-                <li data-skill="js">JavaScript</li>
-            </ul>
-        </section>
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project-grid">
-                <div class="project">
-                    <h3>Resume Website</h3>
-                    <p>An opus of design and code, showcasing Ivy League elegance in a digital realm.</p>
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            <div class="exp-grid">
+                <div class="exp-item">
+                    <h3>Founder | RoadHouse | 2022-Present</h3>
+                    <p>Created a high-yield hospitality & entertainment concept blending wilderness aesthetics with luxury. Drove investor pitches, achieving $500K in seed funding.</p>
+                </div>
+                <div class="exp-item">
+                    <h3>Digital Marketing Lead | Snap Autowheels | 2020-2022</h3>
+                    <p>Led auto lead generation campaigns, increasing conversion rates by 35% through targeted ad strategies.</p>
+                </div>
+                <div class="exp-item">
+                    <h3>Twitch Streamer & Content Creator | 2019-Present</h3>
+                    <p>Built a gaming audience of 10K+ followers, securing brand partnerships and generating $20K in revenue.</p>
                 </div>
             </div>
         </section>
+        <section id="skills">
+            <h2>Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div>Digital Marketing</div>
+                <div>Lead Generation</div>
+                <div>Brand Strategy</div>
+                <div>AI & Automation</div>
+                <div>3D Printing</div>
+                <div>Web Development</div>
+                <div>Alternative Energy</div>
+                <div>Sustainable Planning</div>
+                <div>Game Design</div>
+            </div>
+        </section>
+        <section id="projects">
+            <h2>Projects & Case Studies</h2>
+            <div class="projects-grid">
+                <div class="project">
+                    <h3>RoadHouse: Golf Casino Concept</h3>
+                    <p>A pitch for investors blending wilderness aesthetics with luxury entertainment.</p>
+                </div>
+                <div class="project">
+                    <h3>Snap Autowheels Digital Overhaul</h3>
+                    <p>A marketing revamp that increased lead conversion by 35%.</p>
+                </div>
+                <div class="project">
+                    <h3>Sustainable Transportation Proposal</h3>
+                    <p>Researching next-gen transport solutions like lithium-air hyperloops.</p>
+                </div>
+                <div class="project">
+                    <h3>Cooperative Strategy Board Game</h3>
+                    <p>A survival-based resource management game design.</p>
+                </div>
+            </div>
+        </section>
+        <section id="education">
+            <h2>Education & Certifications</h2>
+            <p><strong>Business Major</strong> – University of Saskatchewan</p>
+            <p><strong>Digital Marketing & Advertising Certifications</strong> – Google, HubSpot</p>
+            <p><strong>Self-Taught Expertise</strong> – AI, Web Development, Automation</p>
+        </section>
+        <section id="media">
+            <h2>Portfolio & Media</h2>
+            <div class="media-grid">
+                <div class="media-item"><a href="#">Case Studies (PDFs)</a></div>
+                <div class="media-item"><a href="https://twitch.tv/daltonellscheid">Twitch Clips</a></div>
+                <div class="media-item"><a href="https://github.com/DollywoodDole">GitHub Repos</a></div>
+                <div class="media-item"><a href="https://threads.net/@daltonellscheid">Threads Highlights</a></div>
+            </div>
+        </section>
+        <section id="contact" class="cta">
+            <h2>Let’s Work Together</h2>
+            <p>Interested in high-yield ventures or sustainable innovation? Let’s connect!</p>
+            <p><a href="https://calendly.com/daltonellscheid">Book a Call</a> | <a href="#">Newsletter Signup</a></p>
+            <button onclick="alert('Thanks for your interest! Email me at dalton@example.com.')">Get in Touch</button>
+        </section>
     </main>
     <footer>
-        <p>Dalton Dole | <a href="mailto:dalton@example.com">dalton@example.com</a> | <a href="https://github.com/DollywoodDole">GitHub</a></p>
+        <p>Dalton Ellscheid | <a href="mailto:dalton@example.com">dalton@example.com</a> | <a href="https://github.com/DollywoodDole">GitHub</a></p>
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const typewriter = document.getElementById("typewriter");
-            const text = "Dalton Dole";
+            const text = "Dalton Ellscheid";
             typewriter.textContent = "";
             let i = 0;
             function type() {
@@ -212,7 +301,7 @@
             typewriter.style.borderRight = "2px solid var(--golden)";
             type();
 
-            const skills = document.querySelectorAll("#skills-list li");
+            const skills = document.querySelectorAll(".skills-grid div");
             skills.forEach(skill => {
                 skill.addEventListener("click", () => {
                     skill.classList.toggle("active");
