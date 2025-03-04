@@ -1,9 +1,15 @@
-documendocument.addEventListener("DOMContentLoaded", () => {
-    const skills = document.querySelectorAll("#skills li");
-    skills.forEach(skill => {
-        skill.addEventListener("click", () => {
-            skill.style.backgroundColor = "#ff6b6b";
-            skill.style.color = "white";
+document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll("nav a");
+    
+    links.forEach(link => {
+        link.addEventListener("mouseover", () => {
+            link.style.color = "var(--deep-red)";
+        });
+
+        link.addEventListener("mouseout", () => {
+            link.style.color = "var(--golden)";
         });
     });
+
+    console.log("Resume website loaded successfully.");
 });
