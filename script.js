@@ -1,35 +1,48 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Smooth scrolling for navigation links
+document.addEventListener("DOMContentLoaded", () => {
+    // Typewriter effect with flourish
+    const typewriter = document.getElementById("typewriter");
+    const text = "Dalton Dole";
+    typewriter.textContent = "";
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            typewriter.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, i === text.length ? 500 : 150); // Pause at end
+        } else {
+            typewriter.style.borderRight = "none"; // Remove cursor
+        }
+    }
+    typewriter.style.borderRight = "2px solid var(--golden)";
+    type();
+
+    // Skill toggle
+    const skills = document.querySelectorAll("#skills-list li");
+    skills.forEach(skill => {
+        skill.addEventListener("click", () => {
+            skill.classList.toggle("active");
+        });
+    });
+
+    // Nav highlight and smooth scroll
     const navLinks = document.querySelectorAll("nav a");
     navLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const targetId = this.getAttribute("href").substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 50,
-                    behavior: "smooth"
-                });
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const sectionId = link.getAttribute("href");
+            document.querySelector(sectionId).scrollIntoView({ behavior: "smooth" });
+        });
+    });
+
+    // Section reveal on scroll
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
             }
         });
-    });
+    }, { threshold: 0.3 });
 
-    // Add hover effect to projects
-    const projects = document.querySelectorAll(".project");
-    projects.forEach(project => {
-        project.addEventListener("mouseover", () => {
-            project.style.transform = "scale(1.05)";
-        });
-        project.addEventListener("mouseout", () => {
-            project.style.transform = "scale(1)";
-        });
-    });
-
-    // Dynamic year update in footer
-    const footer = document.querySelector("footer p");
-    if (footer) {
-        const currentYear = new Date().getFullYear();
-        footer.innerHTML = `&copy; ${currentYear} Dalton Ellscheid. All rights reserved.`;
-    }
+    sections.forEach(section => observer.observe(section));
 });
