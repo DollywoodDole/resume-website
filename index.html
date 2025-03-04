@@ -3,132 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dalton Ellscheid | Resume</title>
+    <title>Dalton Dole | Resume</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        :root {
-            --deep-red: #A8180D;
-            --off-white: #F7F7F7;
-            --golden: #C79900;
-            --dark-grey: #171717;
-        }
-
-        body {
-            font-family: "Georgia", serif;
-            background-color: var(--off-white);
-            color: var(--dark-grey);
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        header {
-            background-color: var(--deep-red);
-            color: var(--off-white);
-            padding: 30px;
-            font-size: 1.2em;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--golden);
-            font-weight: bold;
-            transition: color 0.3s ease-in-out;
-        }
-
-        nav a:hover {
-            color: var(--off-white);
-        }
-
-        section {
-            padding: 50px;
-            max-width: 800px;
-            margin: auto;
-        }
-
-        .project {
-            background-color: var(--golden);
-            color: var(--dark-grey);
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
-            border-radius: 10px;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .project:hover {
-            transform: scale(1.05);
-        }
-
-        footer {
-            background-color: var(--dark-grey);
-            color: var(--off-white);
-            padding: 15px;
-            font-size: 0.9em;
-        }
-    </style>
 </head>
 <body>
     <header>
-        <h1>Dalton Ellscheid</h1>
-        <p>Business Strategist | Digital Marketer | Innovator</p>
+        <h1 id="typewriter">Dalton Dole</h1>
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Passionate about business strategy, digital marketing, and innovation, I help brands scale and optimize their online presence.</p>
-    </section>
-    
-    <section id="experience">
-        <h2>Experience</h2>
-        <ul>
-            <li><strong>Snap Autowheels</strong> - Digital Marketing Consultant</li>
-            <li><strong>Happy Campers</strong> - Business Operations Manager</li>
-            <li><strong>RoadHouse</strong> - Founder & Visionary</li>
-        </ul>
-    </section>
-    
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>RoadHouse</h3>
-            <p>A luxury wilderness-themed golf casino with an 80s Miami vibe.</p>
-        </div>
-        <div class="project">
-            <h3>Snap Autowheels</h3>
-            <p>Automobile lead generation through optimized digital marketing strategies.</p>
-        </div>
-    </section>
-    
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:dalton@example.com">dalton@example.com</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/daltonellscheid" target="_blank">linkedin.com/in/daltonellscheid</a></p>
-    </section>
-    
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Aspiring web developer with a penchant for elegant design and robust code, inspired by the rigor of Ivy League standards.</p>
+        </section>
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul id="skills-list">
+                <li data-skill="html">HTML</li>
+                <li data-skill="css">CSS</li>
+                <li data-skill="js">JavaScript</li>
+            </ul>
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>Resume Website</h3>
+                <p>A meticulously crafted personal site reflecting Ivy League sophistication, built with HTML, CSS, and JavaScript.</p>
+            </div>
+        </section>
+    </main>
     <footer>
-        <p>&copy; 2025 Dalton Ellscheid. All rights reserved.</p>
+        <p>Dalton Ellscheid | <a href="mailto:daltonellscheid@gmail.com">daltonellscheid@gmail.com</a> | <a href="https://github.com/DollywoodDole">GitHub</a></p>
     </footer>
-    
     <script src="script.js"></script>
 </body>
 </html>
-
