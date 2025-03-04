@@ -3,215 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dalton Ellscheid | Resume Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <title>Dalton Ellscheid | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-red: #171717;    /* Was A8180D, now dark-grey */
-            --off-white: #A8180D;   /* Was F7F7F7, now deep-red */
-            --golden: #F7F7F7;     /* Was C79900, now off-white */
-            --dark-grey: #C79900;   /* Was 171717, now golden */
-            --shadow: rgba(0, 0, 0, 0.3);
+            --deep-red: #C79900;    /* Golden - accents, borders */
+            --off-white: #171717;   /* Dark-grey - headers, CTA */
+            --golden: #D4A017;     /* Rich gold - text, links */
+            --dark-grey: #F7F7F7;   /* Off-white - background */
+            --shadow: rgba(0, 0, 0, 0.2);
+            --glow: rgba(212, 160, 23, 0.4);
+            --glass: rgba(247, 247, 247, 0.9);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: "Cormorant Garamond", serif;
-            background: var(--dark-grey); /* Golden background */
-            color: var(--golden);         /* Off-white text */
-            line-height: 1.6;
-            border: 10px solid var(--deep-red); /* Dark-grey border */
+            font-family: "SF Pro Display", sans-serif;
+            background: var(--dark-grey);
+            color: var(--golden);
+            line-height: 1.8;
+            border: 12px solid var(--deep-red);
             min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
             position: relative;
+        }
+        canvas#bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.35;
         }
         header {
-            background: linear-gradient(135deg, var(--off-white) 0%, #7a0e06 100%); /* Deep-red header */
-            color: var(--golden); /* Off-white text */
-            padding: 4rem 2rem 5rem;
+            background: linear-gradient(145deg, var(--off-white) 0%, #252525 100%);
+            padding: 10rem 5rem 8rem;
             text-align: center;
-            box-shadow: 0 4px 20px var(--shadow);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow), transparent);
+            animation: rotateGlow 20s linear infinite;
+            z-index: 0;
         }
         h1 {
-            font-family: "Libre Baskerville", serif;
-            font-size: 4.5rem;
+            font-weight: 700;
+            font-size: 8rem;
             margin: 0;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--golden); /* Off-white glow */
+            letter-spacing: -2.5px;
+            color: var(--deep-red);
+            text-shadow: 0 0 20px var(--glow), 0 0 40px var(--glow);
+            position: relative;
+            z-index: 1;
+            animation: clipReveal 2.5s ease-out;
         }
         .subtitle {
-            font-size: 1.4rem;
-            font-style: italic;
+            font-weight: 300;
+            font-size: 2.2rem;
             opacity: 0.9;
-            margin: 1rem 0 2rem;
+            margin: 2rem 0 3rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 2s ease-out 0.5s both;
         }
-        nav ul { list-style: none; }
-        nav ul li { display: inline-block; margin: 0 2rem; }
+        nav {
+            background: linear-gradient(to bottom, rgba(23, 23, 23, 0.95), rgba(23, 23, 23, 0.75));
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 6px 30px var(--shadow);
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 4.5rem;
+            list-style: none;
+        }
         nav a {
-            color: var(--golden); /* Off-white links */
+            color: var(--deep-red);
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.2rem;
-            transition: color 0.3s ease, transform 0.3s ease;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
         }
         nav a:hover {
-            color: var(--deep-red); /* Dark-grey on hover */
-            transform: translateY(-3px);
+            color: var(--golden);
+            transform: scale(1.1) translateY(-2px);
+            text-shadow: 0 0 10px var(--glow);
         }
         main {
-            max-width: 1100px;
-            margin: -2rem auto 0;
-            padding: 0 2rem;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 6rem;
+            position: relative;
+            z-index: 1;
         }
         section {
-            padding: 5rem 0;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        section.visible { opacity: 1; transform: translateY(0); }
-        h2 {
-            font-family: "Libre Baskerville", serif;
-            color: var(--off-white); /* Deep-red headers */
-            font-size: 2.8rem;
-            margin-bottom: 2rem;
+            padding: 10rem 0;
             position: relative;
+            overflow: hidden;
+            background-attachment: fixed;
+            background-position: center;
+            clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+            transition: clip-path 1s ease;
+        }
+        section.visible { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        section:nth-child(odd) { background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iI0M3OTkwMCIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+'); }
+        section:nth-child(even) { background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI0Q0QTAxNyIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+'); }
+        h2 {
+            font-weight: 700;
+            color: var(--off-white);
+            font-size: 4.5rem;
+            margin-bottom: 5rem;
+            text-align: center;
+            letter-spacing: -1.2px;
+            position: relative;
+            z-index: 1;
         }
         h2::after {
             content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 60px;
-            height: 3px;
-            background: var(--golden); /* Off-white underline */
-            transform: translateX(-50%);
+            display: block;
+            width: 100px;
+            height: 6px;
+            background: var(--deep-red);
+            margin: 2rem auto 0;
+            border-radius: 3px;
+            box-shadow: 0 0 15px var(--glow);
         }
-        .contact-grid, .exp-grid, .skills-grid, .projects-grid, .media-grid {
+        .content-grid {
             display: grid;
-            gap: 1.5rem;
+            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            position: relative;
+            z-index: 1;
         }
-        .contact-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-        .exp-grid .exp-item, .projects-grid .project {
-            background: var(--dark-grey); /* Golden background */
-            padding: 2rem;
-            border-left: 5px solid var(--golden); /* Off-white border */
-            border-radius: 0 10px 10px 0;
-            box-shadow: 0 4px 15px var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .content-item {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 12px 45px var(--shadow);
+            border: 1px solid rgba(199, 153, 0, 0.3);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .exp-grid .exp-item:hover, .projects-grid .project:hover {
-            transform: translateX(10px);
-            box-shadow: 0 6px 20px var(--shadow);
+        .content-item::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 160, 23, 0.2), transparent);
+            animation: rotateGlow 10s linear infinite;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .exp-item h3, .project h3 {
-            color: var(--golden); /* Off-white titles */
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+        .content-item:hover::before { opacity: 1; }
+        .content-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 60px var(--shadow);
         }
-        .skills-grid {
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            text-align: center;
+        .content-item > * { position: relative; z-index: 1; }
+        .content-item h3 {
+            color: var(--golden);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
         }
-        .skills-grid div {
-            background: var(--dark-grey); /* Golden background */
-            border: 3px solid var(--golden); /* Off-white border */
-            padding: 1rem;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+        .svg-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            display: block;
+            animation: pulse 2s infinite;
         }
-        .skills-grid div#business-acumen { border-color: var(--off-white); color: var(--off-white); } /* Deep-red for Business Acumen */
-        .skills-grid div:hover, .skills-grid div.active {
-            background: var(--golden); /* Off-white background */
-            color: var(--dark-grey);   /* Golden text */
-        }
-        .media-grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-        .media-item { padding: 1rem; }
         footer {
-            background: var(--dark-grey); /* Golden background */
-            color: var(--golden);         /* Off-white text */
-            padding: 2rem;
+            background: linear-gradient(to top, var(--dark-grey), #e0e0e0);
+            color: var(--golden);
+            padding: 5rem;
             text-align: center;
-            box-shadow: 0 -4px 20px var(--shadow);
+            box-shadow: 0 -8px 50px var(--shadow);
+            position: relative;
         }
-        footer a, .cta a {
-            color: var(--golden); /* Off-white links */
+        footer a {
+            color: var(--deep-red);
             text-decoration: none;
             font-weight: 700;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
-        footer a:hover, .cta a:hover { color: var(--deep-red); } /* Dark-grey on hover */
+        footer a:hover {
+            color: var(--golden);
+            text-shadow: 0 0 10px var(--glow);
+        }
         .cta {
-            background: linear-gradient(to right, var(--off-white), #7a0e06); /* Deep-red CTA */
-            color: var(--golden); /* Off-white text */
-            padding: 3rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-            box-shadow: 0 4px 15px var(--shadow);
+            background: linear-gradient(to right, var(--off-white), #1e1e1e);
+            color: var(--deep-red);
+            padding: 7rem 5rem;
+            border-radius: 30px;
+            margin: 6rem 0;
+            box-shadow: 0 10px 60px var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(212, 160, 23, 0.25), transparent);
+            animation: sweep 5s infinite;
+        }
+        .cta > * { position: relative; z-index: 1; }
         .cta button {
-            background: var(--golden); /* Off-white button */
-            color: var(--dark-grey);   /* Golden text */
+            background: var(--deep-red);
+            color: var(--dark-grey);
             border: none;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            font-family: "Libre Baskerville", serif;
+            padding: 2rem 5rem;
+            font-size: 2rem;
+            font-weight: 700;
             cursor: pointer;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 30px var(--shadow);
         }
-        .cta button:hover { transform: scale(1.05); }
+        .cta button:hover {
+            background: var(--golden);
+            transform: scale(1.1) translateY(-8px);
+            box-shadow: 0 12px 50px var(--shadow);
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes clipReveal { from { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); } to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); } }
+        @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        @keyframes sweep { 0% { left: -100%; } 50% { left: 100%; } 100% { left: 100%; } }
     </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
     <header>
         <h1 id="typewriter">Dalton Ellscheid</h1>
         <p class="subtitle">Business Strategist | Digital Marketer | Sustainable Innovator</p>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#media">Media</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
     </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
     <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>A dynamic entrepreneur with a background in business and digital marketing, specializing in high-yield ventures, branding, and sustainable innovation. Passionate about leveraging cutting-edge technology for transformative business solutions.</p>
-            <div class="contact-grid">
-                <p>Email: <a href="mailto:daltonellscheid@gmail.com">daltonellscheid@gmail.com</a></p>
-                <p>Phone: <a href="tel:+13063818222">306-381-8222</a></p>
-                <p>Location: Saskatoon, SK</p>
-                <p><a href="https://linkedin.com/in/daltonellscheid">LinkedIn</a> | <a href="https://threads.net/@daltonellscheid">Threads</a> | <a href="https://kick.com/dollywooddole">Kick</a> | <a href="https://github.com/DollywoodDole">GitHub</a> | <a href="https://daltonellscheid.com">Website</a></p>
+            <div class="content-grid">
+                <div class="content-item">
+                    <svg class="svg-icon" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--deep-red)" stroke-width="4"/>
+                        <circle cx="50" cy="50" r="20" fill="var(--golden)"/>
+                    </svg>
+                    <h3>Who I Am</h3>
+                    <p>A dynamic entrepreneur with a passion for innovation and sustainable growth.</p>
+                </div>
+                <div class="content-item">
+                    <h3>My Mission</h3>
+                    <p>Specializing in high-yield ventures, branding, and cutting-edge technology solutions.</p>
+                </div>
+                <div class="content-item">
+                    <h3>Contact Info</h3>
+                    <p>Email: <a href="mailto:daltonellscheid@gmail.com">daltonellscheid@gmail.com</a><br>
+                       Phone: <a href="tel:+13063818222">306-381-8222</a><br>
+                       Location: Saskatoon, SK<br>
+                       <a href="https://linkedin.com/in/daltonellscheid">LinkedIn</a> | <a href="https://threads.net/@daltonellscheid">Threads</a> | <a href="https://kick.com/dollywooddole">Kick</a> | <a href="https://github.com/DollywoodDole">GitHub</a> | <a href="https://daltonellscheid.com">Website</a></p>
+                </div>
             </div>
         </section>
         <section id="experience">
             <h2>Professional Experience</h2>
-            <div class="exp-grid">
-                <div class="exp-item">
+            <div class="content-grid">
+                <div class="content-item" id="exp-1">
                     <h3>Founder | RoadHouse | 2022-Present</h3>
                     <p>Created a high-yield hospitality & entertainment concept blending wilderness aesthetics with luxury. Drove investor pitches, achieving $500K in seed funding.</p>
                 </div>
-                <div class="exp-item">
+                <div class="content-item" id="exp-2">
                     <h3>Co-Founder | BackCountry Spirits | 2021-Present</h3>
                     <p>Co-founded a liquor company (<a href="https://backcountryspirits.ca">backcountryspirits.ca</a>) focused on craft spirits, growing revenue by 25% in first year.</p>
                 </div>
-                <div class="exp-item">
+                <div class="content-item" id="exp-3">
                     <h3>Digital Marketing Lead | Snap Autowheels | 2020-2022</h3>
                     <p>Led auto lead generation campaigns, increasing conversion rates by 35% through targeted ad strategies.</p>
                 </div>
-                <div class="exp-item">
+                <div class="content-item" id="exp-4">
                     <h3>Insurance Sales Agent | 2018-2020</h3>
                     <p>Specialized in tailored insurance solutions, achieving top 10% sales performance regionally.</p>
                 </div>
-                <div class="exp-item">
+                <div class="content-item" id="exp-5">
                     <h3>Kick Streamer & Content Creator | 2019-Present</h3>
                     <p>Built a gaming audience of 10K+ followers on Kick, securing brand partnerships and generating $20K in revenue.</p>
                 </div>
@@ -219,35 +331,35 @@
         </section>
         <section id="skills">
             <h2>Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div id="business-acumen">Business Acumen <span style="font-size: 0.8rem; opacity: 0.8;">(Patents Pending)</span></div>
-                <div>Digital Marketing</div>
-                <div>Lead Generation</div>
-                <div>Brand Strategy</div>
-                <div>AI & Automation</div>
-                <div>3D Printing</div>
-                <div>Web Development</div>
-                <div>Alternative Energy</div>
-                <div>Sustainable Planning</div>
-                <div>Game Design</div>
+            <div class="content-grid">
+                <div class="content-item"><h3>Business Acumen</h3><p>(Patents Pending)</p></div>
+                <div class="content-item"><h3>Digital Marketing</h3></div>
+                <div class="content-item"><h3>Lead Generation</h3></div>
+                <div class="content-item"><h3>Brand Strategy</h3></div>
+                <div class="content-item"><h3>AI & Automation</h3></div>
+                <div class="content-item"><h3>3D Printing</h3></div>
+                <div class="content-item"><h3>Web Development</h3></div>
+                <div class="content-item"><h3>Alternative Energy</h3></div>
+                <div class="content-item"><h3>Sustainable Planning</h3></div>
+                <div class="content-item"><h3>Game Design</h3></div>
             </div>
         </section>
         <section id="projects">
             <h2>Projects & Case Studies</h2>
-            <div class="projects-grid">
-                <div class="project">
+            <div class="content-grid">
+                <div class="content-item">
                     <h3>RoadHouse: Golf Casino Concept</h3>
                     <p>A pitch for investors blending wilderness aesthetics with luxury entertainment.</p>
                 </div>
-                <div class="project">
+                <div class="content-item">
                     <h3>Snap Autowheels Digital Overhaul</h3>
                     <p>A marketing revamp that increased lead conversion by 35%.</p>
                 </div>
-                <div class="project">
+                <div class="content-item">
                     <h3>Sustainable Transportation Proposal</h3>
                     <p>Researching next-gen transport solutions like lithium-air hyperloops.</p>
                 </div>
-                <div class="project">
+                <div class="content-item">
                     <h3>Cooperative Strategy Board Game</h3>
                     <p>A survival-based resource management game design.</p>
                 </div>
@@ -255,17 +367,28 @@
         </section>
         <section id="education">
             <h2>Education & Certifications</h2>
-            <p><strong>Business Major</strong> – University of Saskatchewan</p>
-            <p><strong>Digital Marketing & Advertising Certifications</strong> – Google, HubSpot</p>
-            <p><strong>Self-Taught Expertise</strong> – AI, Web Development, Automation</p>
+            <div class="content-grid">
+                <div class="content-item">
+                    <h3>Business Major</h3>
+                    <p>University of Saskatchewan</p>
+                </div>
+                <div class="content-item">
+                    <h3>Digital Marketing Certifications</h3>
+                    <p>Google, HubSpot</p>
+                </div>
+                <div class="content-item">
+                    <h3>Self-Taught Expertise</h3>
+                    <p>AI, Web Development, Automation</p>
+                </div>
+            </div>
         </section>
         <section id="media">
             <h2>Portfolio & Media</h2>
-            <div class="media-grid">
-                <div class="media-item"><a href="#">Case Studies (PDFs)</a></div>
-                <div class="media-item"><a href="https://kick.com/dollywooddole">Kick Clips</a></div>
-                <div class="media-item"><a href="https://github.com/DollywoodDole">GitHub Repos</a></div>
-                <div class="media-item"><a href="https://threads.net/@daltonellscheid">Threads Highlights</a></div>
+            <div class="content-grid">
+                <div class="content-item"><h3>Case Studies</h3><p><a href="#">PDFs</a></p></div>
+                <div class="content-item"><h3>Kick Clips</h3><p><a href="https://kick.com/dollywooddole">View</a></p></div>
+                <div class="content-item"><h3>GitHub Repos</h3><p><a href="https://github.com/DollywoodDole">Explore</a></p></div>
+                <div class="content-item"><h3>Threads Highlights</h3><p><a href="https://threads.net/@daltonellscheid">Browse</a></p></div>
             </div>
         </section>
         <section id="contact" class="cta">
@@ -273,6 +396,7 @@
             <p>Interested in high-yield ventures or sustainable innovation? Let’s connect!</p>
             <p><a href="https://calendly.com/daltonellscheid">Book a Call</a> | <a href="#">Newsletter Signup</a></p>
             <button onclick="alert('Thanks for your interest! Email me at daltonellscheid@gmail.com.')">Get in Touch</button>
+            <canvas id="webgl-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.5;"></canvas>
         </section>
     </main>
     <footer>
@@ -289,43 +413,127 @@
                 if (i < text.length) {
                     typewriter.textContent += text.charAt(i);
                     i++;
-                    setTimeout(type, i === text.length ? 500 : 100);
+                    setTimeout(type, i === text.length ? 800 : 90);
                 }
             }
-            typewriter.style.borderRight = "2px solid var(--golden)"; /* Off-white */
+            typewriter.style.borderRight = "3px solid var(--deep-red)";
             setTimeout(() => {
                 typewriter.style.borderRight = "none";
                 type();
             }, 500);
 
-            // Skills interaction
-            const skills = document.querySelectorAll(".skills-grid div");
-            skills.forEach(skill => {
-                skill.addEventListener("click", () => {
-                    skill.classList.toggle("active");
-                });
+            // GSAP-like animation for experience items
+            const expItems = document.querySelectorAll("#experience .content-item");
+            expItems.forEach((item, index) => {
+                let yPos = 0;
+                let direction = index % 2 === 0 ? 1 : -1;
+                function animateItem() {
+                    yPos += direction * 0.3;
+                    if (yPos > 8 || yPos < -8) direction *= -1;
+                    item.style.transform = `translateY(${yPos}px)`;
+                    requestAnimationFrame(animateItem);
+                }
+                animateItem();
             });
 
-            // Nav smooth scroll
-            const navLinks = document.querySelectorAll("nav a");
-            navLinks.forEach(link => {
-                link.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    const sectionId = link.getAttribute("href");
-                    document.querySelector(sectionId).scrollIntoView({ behavior: "smooth" });
+            // Canvas particle background
+            const bgCanvas = document.getElementById("bg-canvas");
+            const bgCtx = bgCanvas.getContext("2d");
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            const particles = [];
+            for (let i = 0; i < 300; i++) {
+                particles.push({
+                    x: Math.random() * bgCanvas.width,
+                    y: Math.random() * bgCanvas.height,
+                    radius: Math.random() * 6 + 2,
+                    speedX: Math.random() * 1.5 - 0.75,
+                    speedY: Math.random() * 1.5 - 0.75,
+                    hue: Math.random() * 60 + 40
                 });
-            });
+            }
+            function animateParticles() {
+                bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+                particles.forEach(p => {
+                    bgCtx.beginPath();
+                    bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    bgCtx.fillStyle = `hsl(${p.hue}, 70%, 50%)`;
+                    bgCtx.fill();
+                    bgCtx.shadowBlur = 25;
+                    bgCtx.shadowColor = `hsl(${p.hue}, 70%, 50%)`;
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    if (p.x < 0 || p.x > bgCanvas.width) p.speedX *= -1;
+                    if (p.y < 0 || p.y > bgCanvas.height) p.speedY *= -1;
+                });
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
 
-            // Section reveal
-            const sections = document.querySelectorAll("section");
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
+            // WebGL in CTA
+            const webglCanvas = document.getElementById("webgl-canvas");
+            const gl = webglCanvas.getContext("webgl");
+            if (gl) {
+                const vsSource = `
+                    attribute vec2 a_position;
+                    void main() {
+                        gl_Position = vec4(a_position, 0.0, 1.0);
                     }
-                });
-            }, { threshold: 0.2 });
-            sections.forEach(section => observer.observe(section));
+                `;
+                const fsSource = `
+                    precision mediump float;
+                    uniform vec2 u_resolution;
+                    uniform float u_time;
+                    void main() {
+                        vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                        float r = sin(uv.x * 10.0 + u_time) * 0.5 + 0.5;
+                        float g = cos(uv.y * 10.0 + u_time) * 0.5 + 0.5;
+                        gl_FragColor = vec4(r * 0.82, g * 0.62, 0.1, 1.0);
+                    }
+                `;
+                const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+                gl.shaderSource(vertexShader, vsSource);
+                gl.compileShader(vertexShader);
+                const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+                gl.shaderSource(fragmentShader, fsSource);
+                gl.compileShader(fragmentShader);
+                const program = gl.createProgram();
+                gl.attachShader(program, vertexShader);
+                gl.attachShader(program, fragmentShader);
+                gl.linkProgram(program);
+                gl.useProgram(program);
+                const positionBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+                gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+                const positionLoc = gl.getAttribLocation(program, "a_position");
+                gl.enableVertexAttribArray(positionLoc);
+                gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+                const resolutionLoc = gl.getUniformLocation(program, "u_resolution");
+                const timeLoc = gl.getUniformLocation(program, "u_time");
+                gl.uniform2f(resolutionLoc, webglCanvas.width, webglCanvas.height);
+                let time = 0;
+                function renderWebGL() {
+                    time += 0.05;
+                    gl.uniform1f(timeLoc, time);
+                    gl.viewport(0, 0, webglCanvas.width, webglCanvas.height);
+                    gl.clear(gl.COLOR_BUFFER_BIT);
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                    requestAnimationFrame(renderWebGL);
+                }
+                renderWebGL();
+            }
+
+            // Dynamic resize
+            window.addEventListener("resize", () => {
+                bgCanvas.width = window.innerWidth;
+                bgCanvas.height = window.innerHeight;
+                if (gl) {
+                    webglCanvas.width = webglCanvas.offsetWidth;
+                    webglCanvas.height = webglCanvas.offsetHeight;
+                    gl.uniform2f(resolutionLoc, webglCanvas.width, webglCanvas.height);
+                }
+            });
         });
     </script>
 </body>
