@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dalton Dole | Resume</title>
+    <title>Dalton Dole | Curriculum Vitae</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
+        <div class="header-overlay"></div>
         <h1 id="typewriter">Dalton Dole</h1>
+        <p class="subtitle">Aspiring Web Architect | Scholar of Design</p>
         <nav>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about" data-section="about">About</a></li>
+                <li><a href="#skills" data-section="skills">Skills</a></li>
+                <li><a href="#projects" data-section="projects">Projects</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>Aspiring web developer with a penchant for elegant design and robust code, inspired by the rigor of Ivy League standards.</p>
+            <p>A relentless innovator blending the artistry of Ivy League tradition with cutting-edge web development.</p>
         </section>
         <section id="skills">
             <h2>Skills</h2>
@@ -32,14 +35,16 @@
         </section>
         <section id="projects">
             <h2>Projects</h2>
-            <div class="project">
-                <h3>Resume Website</h3>
-                <p>A meticulously crafted personal site reflecting Ivy League sophistication, built with HTML, CSS, and JavaScript.</p>
+            <div class="project-grid">
+                <div class="project" data-project="resume">
+                    <h3>Resume Website</h3>
+                    <p>An opus of design and code, showcasing Ivy League elegance in a digital realm.</p>
+                </div>
             </div>
         </section>
     </main>
     <footer>
-        <p>Dalton Ellscheid | <a href="mailto:daltonellscheid@gmail.com">daltonellscheid@gmail.com</a> | <a href="https://github.com/DollywoodDole">GitHub</a></p>
+        <p>Dalton Dole | <a href="mailto:dalton@example.com">dalton@example.com</a> | <a href="https://github.com/DollywoodDole">GitHub</a></p>
     </footer>
     <script src="script.js"></script>
 </body>
