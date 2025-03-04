@@ -12,18 +12,31 @@
             --golden: #C79900;
             --dark-grey: #171717;
             --shadow: rgba(0, 0, 0, 0.3);
-            --glow: #C79900;
+            --glow: #F7F7F7; /* Off-white as accent */
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: "Cormorant Garamond", serif;
-            background: linear-gradient(to bottom, var(--off-white), #e8e8e8);
-            color: var(--dark-grey);
+            background: linear-gradient(to bottom, #e8e8e8, var(--dark-grey));
+            color: var(--off-white);
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            cursor: none;
         }
-        canvas#particles { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.2; }
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--golden);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 10px var(--glow);
+        }
+        #cursor.hover { transform: scale(1.5); background: rgba(199, 153, 0, 0.3); }
+        canvas#particles { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.3; }
         header {
             position: relative;
             background: linear-gradient(135deg, var(--deep-red) 0%, #7a0e06 100%);
@@ -31,7 +44,7 @@
             padding: 5rem 2rem 7rem;
             text-align: center;
             box-shadow: 0 4px 30px var(--shadow);
-            overflow: hidden;
+            z-index: 1;
         }
         .header-overlay {
             position: absolute;
@@ -91,7 +104,14 @@
             opacity: 0;
             transform: translateY(70px) scale(0.95);
             transition: all 1s ease-out;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
         }
+        #about { background: linear-gradient(rgba(23, 23, 23, 0.8), rgba(23, 23, 23, 0.8)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDBweCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjQzgxODA4IiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4='); }
+        #experience { background: linear-gradient(rgba(23, 23, 23, 0.8), rgba(23, 23, 23, 0.8)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDBweCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjQTgxODBEIiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4='); }
+        #skills { background: linear-gradient(rgba(23, 23, 23, 0.8), rgba(23, 23, 23, 0.8)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDBweCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRjdGN0Y3IiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4='); }
+        #projects { background: linear-gradient(rgba(23, 23, 23, 0.8), rgba(23, 23, 23, 0.8)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDBweCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjQzc5OTAwIiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4='); }
         section.visible { opacity: 1; transform: translateY(0) scale(1); }
         h2 {
             font-family: "Libre Baskerville", serif;
@@ -108,7 +128,7 @@
             left: 50%;
             width: 80px;
             height: 4px;
-            background: var(--golden);
+            background: var(--off-white);
             transform: translateX(-50%);
             box-shadow: 0 0 10px var(--glow);
         }
@@ -118,7 +138,7 @@
         }
         .contact-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
         .exp-grid .exp-item, .projects-grid .project {
-            background: var(--off-white);
+            background: var(--dark-grey);
             padding: 2.5rem;
             border-left: 6px solid var(--deep-red);
             border-radius: 0 15px 15px 0;
@@ -134,7 +154,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(199, 153, 0, 0.2), transparent);
+            background: linear-gradient(120deg, transparent, rgba(247, 247, 247, 0.2), transparent);
             transition: all 0.5s ease;
         }
         .exp-grid .exp-item:hover::before, .projects-grid .project:hover::before { left: 100%; }
@@ -143,18 +163,18 @@
             box-shadow: 0 10px 30px var(--shadow);
         }
         .exp-item h3, .project h3 {
-            color: var(--deep-red);
+            color: var(--off-white);
             font-size: 2rem;
             margin-bottom: 0.75rem;
-            text-shadow: 0 0 5px var(--shadow);
+            text-shadow: 0 0 5px var(--glow);
         }
         .skills-grid {
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             text-align: center;
         }
         .skills-grid div {
-            background: var(--off-white);
-            border: 4px solid var(--golden);
+            background: var(--dark-grey);
+            border: 4px solid var(--off-white);
             padding: 1.5rem;
             border-radius: 30px;
             font-size: 1.3rem;
@@ -163,6 +183,7 @@
             box-shadow: 0 4px 15px var(--shadow);
             position: relative;
         }
+        .skills-grid div#business-acumen { border-color: var(--golden); color: var(--golden); }
         .skills-grid div::after {
             content: "";
             position: absolute;
@@ -170,7 +191,7 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: radial-gradient(circle, var(--golden), transparent);
+            background: radial-gradient(circle, var(--off-white), transparent);
             opacity: 0;
             transition: all 0.5s ease;
             transform: translate(-50%, -50%);
@@ -181,7 +202,7 @@
             opacity: 0.3;
         }
         .skills-grid div:hover, .skills-grid div.active {
-            background: var(--golden);
+            background: var(--off-white);
             color: var(--dark-grey);
             transform: scale(1.15);
             box-shadow: 0 6px 20px var(--shadow);
@@ -202,13 +223,13 @@
             box-shadow: 0 -6px 30px var(--shadow);
         }
         footer a, .cta a {
-            color: var(--golden);
+            color: var(--off-white);
             text-decoration: none;
             font-weight: 700;
             transition: all 0.4s ease;
         }
         footer a:hover, .cta a:hover {
-            color: var(--off-white);
+            color: var(--golden);
             text-shadow: 0 0 10px var(--glow);
         }
         .cta {
@@ -220,7 +241,7 @@
             box-shadow: 0 6px 20px var(--shadow);
         }
         .cta button {
-            background: var(--golden);
+            background: var(--off-white);
             color: var(--dark-grey);
             border: none;
             padding: 1.5rem 3rem;
@@ -238,6 +259,7 @@
     </style>
 </head>
 <body>
+    <div id="cursor"></div>
     <canvas id="particles"></canvas>
     <header>
         <div class="header-overlay"></div>
@@ -260,10 +282,10 @@
             <h2>About Me</h2>
             <p>A dynamic entrepreneur with a background in business and digital marketing, specializing in high-yield ventures, branding, and sustainable innovation. Passionate about leveraging cutting-edge technology for transformative business solutions.</p>
             <div class="contact-grid">
-                <p>Email: <a href="mailto:dalton@example.com">dalton@example.com</a></p>
-                <p>Phone: (306) 555-1234</p>
+                <p>Email: <a href="mailto:daltonellscheid@gmail.com">daltonellscheid@gmail.com</a></p>
+                <p>Phone: <a href="tel:+13063818222">306-381-8222</a></p>
                 <p>Location: Saskatoon, SK</p>
-                <p><a href="https://linkedin.com/in/daltonellscheid">LinkedIn</a> | <a href="https://threads.net/@daltonellscheid">Threads</a> | <a href="https://twitch.tv/daltonellscheid">Twitch</a> | <a href="https://github.com/DollywoodDole">GitHub</a> | <a href="https://daltonellscheid.com">Website</a></p>
+                <p><a href="https://linkedin.com/in/daltonellscheid">LinkedIn</a> | <a href="https://threads.net/@daltonellscheid">Threads</a> | <a href="https://kick.com/dollywooddole">Kick</a> | <a href="https://github.com/DollywoodDole">GitHub</a> | <a href="https://daltonellscheid.com">Website</a></p>
             </div>
         </section>
         <section id="experience">
@@ -274,18 +296,27 @@
                     <p>Created a high-yield hospitality & entertainment concept blending wilderness aesthetics with luxury. Drove investor pitches, achieving $500K in seed funding.</p>
                 </div>
                 <div class="exp-item">
+                    <h3>Co-Founder | BackCountry Spirits | 2021-Present</h3>
+                    <p>Co-founded a liquor company (<a href="https://backcountryspirits.ca">backcountryspirits.ca</a>) focused on craft spirits, growing revenue by 25% in first year.</p>
+                </div>
+                <div class="exp-item">
                     <h3>Digital Marketing Lead | Snap Autowheels | 2020-2022</h3>
                     <p>Led auto lead generation campaigns, increasing conversion rates by 35% through targeted ad strategies.</p>
                 </div>
                 <div class="exp-item">
-                    <h3>Twitch Streamer & Content Creator | 2019-Present</h3>
-                    <p>Built a gaming audience of 10K+ followers, securing brand partnerships and generating $20K in revenue.</p>
+                    <h3>Insurance Sales Agent | 2018-2020</h3>
+                    <p>Specialized in tailored insurance solutions, achieving top 10% sales performance regionally.</p>
+                </div>
+                <div class="exp-item">
+                    <h3>Kick Streamer & Content Creator | 2019-Present</h3>
+                    <p>Built a gaming audience of 10K+ followers on Kick, securing brand partnerships and generating $20K in revenue.</p>
                 </div>
             </div>
         </section>
         <section id="skills">
             <h2>Skills & Expertise</h2>
             <div class="skills-grid">
+                <div id="business-acumen">Business Acumen <span style="font-size: 0.8rem; opacity: 0.8;">(Patents Pending)</span></div>
                 <div>Digital Marketing</div>
                 <div>Lead Generation</div>
                 <div>Brand Strategy</div>
@@ -328,7 +359,7 @@
             <h2>Portfolio & Media</h2>
             <div class="media-grid">
                 <div class="media-item"><a href="#">Case Studies (PDFs)</a></div>
-                <div class="media-item"><a href="https://twitch.tv/daltonellscheid">Twitch Clips</a></div>
+                <div class="media-item"><a href="https://kick.com/dollywooddole">Kick Clips</a></div>
                 <div class="media-item"><a href="https://github.com/DollywoodDole">GitHub Repos</a></div>
                 <div class="media-item"><a href="https://threads.net/@daltonellscheid">Threads Highlights</a></div>
             </div>
@@ -337,11 +368,11 @@
             <h2>Let’s Work Together</h2>
             <p>Interested in high-yield ventures or sustainable innovation? Let’s connect!</p>
             <p><a href="https://calendly.com/daltonellscheid">Book a Call</a> | <a href="#">Newsletter Signup</a></p>
-            <button onclick="alert('Thanks for your interest! Email me at dalton@example.com.')">Get in Touch</button>
+            <button onclick="alert('Thanks for your interest! Email me at daltonellscheid@gmail.com.')">Get in Touch</button>
         </section>
     </main>
     <footer>
-        <p>Dalton Ellscheid | <a href="mailto:dalton@example.com">dalton@example.com</a> | <a href="https://github.com/DollywoodDole">GitHub</a></p>
+        <p>Dalton Ellscheid | <a href="mailto:daltonellscheid@gmail.com">daltonellscheid@gmail.com</a> | <a href="https://github.com/DollywoodDole">GitHub</a></p>
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -350,9 +381,11 @@
             const text = "Dalton Ellscheid";
             typewriter.textContent = "";
             let i = 0;
+            const typeSound = new Audio('data:audio/mpeg;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAAOAAACAgAABAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
             function type() {
                 if (i < text.length) {
                     typewriter.textContent += text.charAt(i);
+                    typeSound.cloneNode().play();
                     i++;
                     setTimeout(type, i === text.length ? 800 : 120);
                 } else {
@@ -360,14 +393,16 @@
                     typewriter.style.animation = "glow 2s infinite alternate";
                 }
             }
-            typewriter.style.borderRight = "3px solid var(--golden)";
+            typewriter.style.borderRight = "3px solid var(--off-white)";
             type();
 
             // Skills interaction
             const skills = document.querySelectorAll(".skills-grid div");
+            const clickSound = new Audio('data:audio/mpeg;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAAOAAACAgAABAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
             skills.forEach(skill => {
                 skill.addEventListener("click", () => {
                     skill.classList.toggle("active");
+                    clickSound.cloneNode().play();
                     if (skill.classList.contains("active")) {
                         skill.style.animation = "pulseGlow 1.5s infinite";
                     } else {
@@ -383,10 +418,11 @@
                     e.preventDefault();
                     const sectionId = link.getAttribute("href");
                     document.querySelector(sectionId).scrollIntoView({ behavior: "smooth" });
+                    clickSound.cloneNode().play();
                 });
             });
 
-            // Section reveal
+            // Section reveal with parallax
             const sections = document.querySelectorAll("section");
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -396,6 +432,12 @@
                 });
             }, { threshold: 0.2 });
             sections.forEach(section => observer.observe(section));
+            window.addEventListener("scroll", () => {
+                sections.forEach(section => {
+                    const offset = window.scrollY * 0.1;
+                    section.style.backgroundPositionY = `${offset}px`;
+                });
+            });
 
             // Particle background
             const canvas = document.getElementById("particles");
@@ -403,13 +445,13 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             const particles = [];
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 60; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 3 + 1,
-                    speedX: Math.random() * 0.5 - 0.25,
-                    speedY: Math.random() * 0.5 - 0.25
+                    radius: Math.random() * 4 + 1,
+                    speedX: Math.random() * 0.6 - 0.3,
+                    speedY: Math.random() * 0.6 - 0.3
                 });
             }
             function animateParticles() {
@@ -417,7 +459,7 @@
                 particles.forEach(p => {
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = "rgba(199, 153, 0, 0.5)";
+                    ctx.fillStyle = "rgba(247, 247, 247, 0.5)"; // Off-white particles
                     ctx.fill();
                     p.x += p.speedX;
                     p.y += p.speedY;
@@ -427,6 +469,17 @@
                 requestAnimationFrame(animateParticles);
             }
             animateParticles();
+
+            // Custom cursor
+            const cursor = document.getElementById("cursor");
+            document.addEventListener("mousemove", (e) => {
+                cursor.style.left = `${e.clientX - 10}px`;
+                cursor.style.top = `${e.clientY - 10}px`;
+            });
+            document.querySelectorAll("a, button, .skills-grid div").forEach(el => {
+                el.addEventListener("mouseover", () => cursor.classList.add("hover"));
+                el.addEventListener("mouseout", () => cursor.classList.remove("hover"));
+            });
 
             // Keyframe animations
             const styleSheet = document.createElement("style");
