@@ -7,26 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-red: #A8180D;
-            --off-white: #F7F7F7;
-            --golden: #C79900;
-            --dark-grey: #171717;
+            --deep-red: #171717;    /* Was A8180D, now dark-grey */
+            --off-white: #A8180D;   /* Was F7F7F7, now deep-red */
+            --golden: #F7F7F7;     /* Was C79900, now off-white */
+            --dark-grey: #C79900;   /* Was 171717, now golden */
             --shadow: rgba(0, 0, 0, 0.3);
-            --glow: #F7F7F7; /* Off-white as accent */
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: "Cormorant Garamond", serif;
-            background: var(--dark-grey);
-            color: var(--off-white);
+            background: var(--dark-grey); /* Golden background */
+            color: var(--golden);         /* Off-white text */
             line-height: 1.6;
-            border: 10px solid var(--deep-red); /* Added border */
+            border: 10px solid var(--deep-red); /* Dark-grey border */
             min-height: 100vh;
             position: relative;
         }
         header {
-            background: linear-gradient(135deg, var(--deep-red) 0%, #7a0e06 100%);
-            color: var(--off-white);
+            background: linear-gradient(135deg, var(--off-white) 0%, #7a0e06 100%); /* Deep-red header */
+            color: var(--golden); /* Off-white text */
             padding: 4rem 2rem 5rem;
             text-align: center;
             box-shadow: 0 4px 20px var(--shadow);
@@ -36,7 +35,7 @@
             font-size: 4.5rem;
             margin: 0;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--glow);
+            text-shadow: 0 0 10px var(--golden); /* Off-white glow */
         }
         .subtitle {
             font-size: 1.4rem;
@@ -47,14 +46,14 @@
         nav ul { list-style: none; }
         nav ul li { display: inline-block; margin: 0 2rem; }
         nav a {
-            color: var(--golden);
+            color: var(--golden); /* Off-white links */
             text-decoration: none;
             font-weight: 700;
             font-size: 1.2rem;
             transition: color 0.3s ease, transform 0.3s ease;
         }
         nav a:hover {
-            color: var(--off-white);
+            color: var(--deep-red); /* Dark-grey on hover */
             transform: translateY(-3px);
         }
         main {
@@ -71,7 +70,7 @@
         section.visible { opacity: 1; transform: translateY(0); }
         h2 {
             font-family: "Libre Baskerville", serif;
-            color: var(--deep-red);
+            color: var(--off-white); /* Deep-red headers */
             font-size: 2.8rem;
             margin-bottom: 2rem;
             position: relative;
@@ -83,7 +82,7 @@
             left: 50%;
             width: 60px;
             height: 3px;
-            background: var(--off-white);
+            background: var(--golden); /* Off-white underline */
             transform: translateX(-50%);
         }
         .contact-grid, .exp-grid, .skills-grid, .projects-grid, .media-grid {
@@ -92,9 +91,9 @@
         }
         .contact-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
         .exp-grid .exp-item, .projects-grid .project {
-            background: var(--dark-grey);
+            background: var(--dark-grey); /* Golden background */
             padding: 2rem;
-            border-left: 5px solid var(--off-white);
+            border-left: 5px solid var(--golden); /* Off-white border */
             border-radius: 0 10px 10px 0;
             box-shadow: 0 4px 15px var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -104,7 +103,7 @@
             box-shadow: 0 6px 20px var(--shadow);
         }
         .exp-item h3, .project h3 {
-            color: var(--off-white);
+            color: var(--golden); /* Off-white titles */
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
@@ -113,48 +112,48 @@
             text-align: center;
         }
         .skills-grid div {
-            background: var(--dark-grey);
-            border: 3px solid var(--off-white);
+            background: var(--dark-grey); /* Golden background */
+            border: 3px solid var(--golden); /* Off-white border */
             padding: 1rem;
             border-radius: 20px;
             font-size: 1.2rem;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .skills-grid div#business-acumen { border-color: var(--golden); color: var(--golden); }
+        .skills-grid div#business-acumen { border-color: var(--off-white); color: var(--off-white); } /* Deep-red for Business Acumen */
         .skills-grid div:hover, .skills-grid div.active {
-            background: var(--off-white);
-            color: var(--dark-grey);
+            background: var(--golden); /* Off-white background */
+            color: var(--dark-grey);   /* Golden text */
         }
         .media-grid {
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
         .media-item { padding: 1rem; }
         footer {
-            background: var(--dark-grey);
-            color: var(--off-white);
+            background: var(--dark-grey); /* Golden background */
+            color: var(--golden);         /* Off-white text */
             padding: 2rem;
             text-align: center;
             box-shadow: 0 -4px 20px var(--shadow);
         }
         footer a, .cta a {
-            color: var(--off-white);
+            color: var(--golden); /* Off-white links */
             text-decoration: none;
             font-weight: 700;
             transition: color 0.3s ease;
         }
-        footer a:hover, .cta a:hover { color: var(--golden); }
+        footer a:hover, .cta a:hover { color: var(--deep-red); } /* Dark-grey on hover */
         .cta {
-            background: linear-gradient(to right, var(--deep-red), #7a0e06);
-            color: var(--off-white);
+            background: linear-gradient(to right, var(--off-white), #7a0e06); /* Deep-red CTA */
+            color: var(--golden); /* Off-white text */
             padding: 3rem;
             border-radius: 10px;
             margin: 2rem 0;
             box-shadow: 0 4px 15px var(--shadow);
         }
         .cta button {
-            background: var(--off-white);
-            color: var(--dark-grey);
+            background: var(--golden); /* Off-white button */
+            color: var(--dark-grey);   /* Golden text */
             border: none;
             padding: 1rem 2rem;
             font-size: 1.2rem;
@@ -293,7 +292,7 @@
                     setTimeout(type, i === text.length ? 500 : 100);
                 }
             }
-            typewriter.style.borderRight = "2px solid var(--off-white)";
+            typewriter.style.borderRight = "2px solid var(--golden)"; /* Off-white */
             setTimeout(() => {
                 typewriter.style.borderRight = "none";
                 type();
