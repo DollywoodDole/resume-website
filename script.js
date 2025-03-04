@@ -1,35 +1,30 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll("nav a");
-    navLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const targetId = this.getAttribute("href").substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 50,
-                    behavior: "smooth"
-                });
+document.addEventListener("DOMContentLoaded", () => {
+    // Typewriter effect for name
+    const typewriter = document.getElementById("typewriter");
+    const text = typewriter.textContent;
+    typewriter.textContent = "";
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            typewriter.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 200); // Slower for gravitas
+        }
+    }
+    type();
+
+    // Skill highlight with toggle
+    const skills = document.querySelectorAll("#skills-list li");
+    skills.forEach(skill => {
+        skill.addEventListener("click", () => {
+            const isActive = skill.style.backgroundColor === "rgb(199, 153, 0)"; // Golden in RGB
+            if (isActive) {
+                skill.style.backgroundColor = "var(--off-white)";
+                skill.style.color = "var(--dark-grey)";
+            } else {
+                skill.style.backgroundColor = "var(--golden)";
+                skill.style.color = "var(--dark-grey)";
             }
         });
     });
-
-    // Add hover effect to projects
-    const projects = document.querySelectorAll(".project");
-    projects.forEach(project => {
-        project.addEventListener("mouseover", () => {
-            project.style.transform = "scale(1.05)";
-        });
-        project.addEventListener("mouseout", () => {
-            project.style.transform = "scale(1)";
-        });
-    });
-
-    // Dynamic year update in footer
-    const footer = document.querySelector("footer p");
-    if (footer) {
-        const currentYear = new Date().getFullYear();
-        footer.innerHTML = `&copy; ${currentYear} Dalton Ellscheid. All rights reserved.`;
-    }
 });
